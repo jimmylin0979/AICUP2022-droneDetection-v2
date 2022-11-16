@@ -2299,7 +2299,8 @@ class MixUp:
                  min_area_ratio=0.2,
                  max_aspect_ratio=20,
                  bbox_clip_border=True,
-                 skip_filter=True):
+                 skip_filter=True,
+                 prob=0.2):
         assert isinstance(img_scale, tuple)
         log_img_scale(img_scale, skip_square=True)
         self.dynamic_scale = img_scale
@@ -2312,6 +2313,7 @@ class MixUp:
         self.max_aspect_ratio = max_aspect_ratio
         self.bbox_clip_border = bbox_clip_border
         self.skip_filter = skip_filter
+        self.prob = prob
 
     def __call__(self, results):
         """Call function to make a mixup of image.
@@ -2322,6 +2324,9 @@ class MixUp:
         Returns:
             dict: Result dict with mixup transformed.
         """
+
+        if random.uniform(0, 1) > self.prob:
+            return results
 
         results = self._mixup_transform(results)
         return results

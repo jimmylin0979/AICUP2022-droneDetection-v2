@@ -3,10 +3,14 @@
 
 ### Dataset ###
 data/test
+data/Public Testing Dataset_v2
+
 data/train
 data/Training Dataset_v*
 data/VisDrone*
 data/*.zip
+
+data/helper_fiftyoneDataset*.py
 
 ### Results ###
 results/*
