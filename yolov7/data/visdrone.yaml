@@ -1,0 +1,10 @@
+# 
+train: /home/jimmylin0979/Desktop/jimmy/AICUP2022-droneDetection-v2/data/VisDrone/images/train
+test: /home/jimmylin0979/Desktop/jimmy/AICUP2022-droneDetection-v2/data/VisDrone/images/valid/
+val: /home/jimmylin0979/Desktop/jimmy/AICUP2022-droneDetection-v2/data/VisDrone/images/test/
+
+# number of classes
+nc: 10
+
+# class names
+names: ['pedestrian', 'people', 'bicycle', 'car', 'van', 'truck', 'tricycle', 'awning-tricycle', 'bus', 'motor']

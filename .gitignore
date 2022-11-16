@@ -5,8 +5,11 @@
 data/test
 data/train
 data/Training Dataset_v*
-data/VisDrone2019
+data/VisDrone*
 data/*.zip
+
+### Results ###
+results/*
 
 ### YOLOv7 ###
 yolov7/.git

@@ -1,0 +1,14 @@
+# pytorch & related libraries  
+torch
+torchvision
+tensorboard
+
+# 
+opencv-python
+fiftyone
+albumentations
+
+#
+argparse
+tqdm
+pandas
