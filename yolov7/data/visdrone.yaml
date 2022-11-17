@@ -1,7 +1,7 @@
 # 
-train: /home/jimmylin0979/Desktop/jimmy/AICUP2022-droneDetection-v2/data/VisDrone/images/train
-test: /home/jimmylin0979/Desktop/jimmy/AICUP2022-droneDetection-v2/data/VisDrone/images/valid/
-val: /home/jimmylin0979/Desktop/jimmy/AICUP2022-droneDetection-v2/data/VisDrone/images/test/
+train: /home/user/桌面/FredH/AICUP/AICUP2022-droneDetection-v2/data/VisDrone/images/train
+test: /home/user/桌面/FredH/AICUP/AICUP2022-droneDetection-v2/data/VisDrone/images/valid/
+val: /home/user/桌面/FredH/AICUP/AICUP2022-droneDetection-v2/data/VisDrone/images/test/
 
 # number of classes
 nc: 10

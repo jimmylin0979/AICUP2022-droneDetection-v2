@@ -10,22 +10,43 @@ def main():
 
     #
     CLASSES = ('car', 'hov', 'person', 'motorcycle')
-    root_sample = r'./data/AICUP2022-droneDetection/test/public/'
-    # root_sample = r'.data/test/public_tiled/data'
+    root_sample = r'./data/Public Testing Dataset_v2/public/'
+    # root_sample = r'./data/Public Testing Dataset_v2/public_tiled/data'
     root_detections = r'./results'
 
     #
     dfs = []
     model = []
+
+    # ./results/mmdet
     blacklist = ['faster_rcnn', 'faster_rcnn_x_101']
-    for result in os.listdir(root_detections):
+    root_detections_mmdet = f"{root_detections}/mmdet"
+    for result in os.listdir(root_detections_mmdet):
         # 
-        if not os.path.isdir(f"{root_detections}/{result}"):
+        if not os.path.isdir(f"{root_detections_mmdet}/{result}"):
             continue
         if result in blacklist:
             continue
         
-        output_path = f"{root_detections}/{result}/predictions.csv"
+        output_path = f"{root_detections_mmdet}/{result}/predictions.csv"
+        print(output_path)
+        if os.path.exists(output_path):
+            df = pd.read_csv(output_path, header=None)
+            dfs.append(df)
+            model.append(result)
+    print(model)
+
+    # ./results/yolov7/train
+    blacklist = ['']
+    root_detections_yolov7 = f"{root_detections}/yolov7/detect"
+    for result in os.listdir(root_detections_yolov7):
+        # 
+        if not os.path.isdir(f"{root_detections_yolov7}/{result}"):
+            continue
+        if result in blacklist:
+            continue
+        
+        output_path = f"{root_detections_yolov7}/{result}/predictions.csv"
         print(output_path)
         if os.path.exists(output_path):
             df = pd.read_csv(output_path, header=None)
@@ -88,6 +109,7 @@ def main():
 
                     # 
                     detections.append(
+                        # fo.Detection(label=str(int(content[1])), bounding_box=bounding_box, confidence=confidence)
                         fo.Detection(label=label, bounding_box=bounding_box, confidence=confidence)
                     )
                 

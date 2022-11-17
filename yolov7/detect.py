@@ -1,6 +1,7 @@
 import argparse
 import time
 from pathlib import Path
+import os
 
 import cv2
 import torch
@@ -66,7 +67,14 @@ def detect(save_img=False):
     old_img_w = old_img_h = imgsz
     old_img_b = 1
 
+    # Get image names (predictions)
+    prediction_names = []
+    for filename in sorted(os.listdir(source)):
+        if filename.endswith('.png'):
+            prediction_names.append(filename)
+
     t0 = time.time()
+    prediction_index = -1
     for path, img, im0s, vid_cap in dataset:
         img = torch.from_numpy(img).to(device)
         img = img.half() if half else img.float()  # uint8 to fp16/32
@@ -97,6 +105,7 @@ def detect(save_img=False):
             pred = apply_classifier(pred, modelc, img, im0s)
 
         # Process detections
+        prediction_index += 1   # forward prediction index by 1
         for i, det in enumerate(pred):  # detections per image
             if webcam:  # batch_size >= 1
                 p, s, im0, frame = path[i], '%g: ' % i, im0s[i].copy(), dataset.count
@@ -109,6 +118,7 @@ def detect(save_img=False):
             gn = torch.tensor(im0.shape)[[1, 0, 1, 0]]  # normalization gain whwh
             if len(det):
                 # Rescale boxes from img_size to im0 size
+                # im0 size = [H, W, C]
                 det[:, :4] = scale_coords(img.shape[2:], det[:, :4], im0.shape).round()
 
                 # Print results
@@ -118,11 +128,30 @@ def detect(save_img=False):
 
                 # Write results
                 for *xyxy, conf, cls in reversed(det):
+                    xywh = (xyxy2xywh(torch.tensor(xyxy).view(1, 4)) / gn).view(-1).tolist()  # normalized xywh
                     if save_txt:  # Write to file
-                        xywh = (xyxy2xywh(torch.tensor(xyxy).view(1, 4)) / gn).view(-1).tolist()  # normalized xywh
                         line = (cls, *xywh, conf) if opt.save_conf else (cls, *xywh)  # label format
                         with open(txt_path + '.txt', 'a') as f:
                             f.write(('%g ' * len(line)).rstrip() % line + '\n')
+                    
+                    prediction_path = str(save_dir / 'predictions.csv')             # did not use tiled dataset
+                    if 'tiled' in source:
+                        prediction_path = str(save_dir / 'predictions_tiled.csv')   # use tiled 
+                    with open(prediction_path, 'a') as f:
+                        content = [int(cls.item()), *xywh, conf.item()]
+                        if content[0] == 2:     # BUG: I have no idea why the label index of motorcyle and person will mismatch
+                            content[0] = 3
+                        elif content[0] == 3:
+                            content[0] = 2
+                        content[1] = content[1] - content[3] / 2     # x-center -> x
+                        content[2] = content[2] - content[4] / 2     # y-center -> y
+                        content[1] = round(content[1] * im0.shape[1])  # x-coco
+                        content[2] = round(content[2] * im0.shape[0])  # y-coco
+                        content[3] = round(content[3] * im0.shape[1])  # w-coco
+                        content[4] = round(content[4] * im0.shape[0])  # h-coco
+                        # TODO : Check is any bounding box is outside the image 
+                        content = [str(j) for j in content]
+                        f.write(prediction_names[prediction_index][:-4] + ',' + ','.join(content) + '\n')   # save predictions with coco format
 
                     if save_img or view_img:  # Add bbox to image
                         label = f'{names[int(cls)]} {conf:.2f}'

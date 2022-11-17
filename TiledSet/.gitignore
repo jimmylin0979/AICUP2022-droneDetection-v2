@@ -1,25 +1,8 @@
 # Created by https://www.toptal.com/developers/gitignore/api/python,visualstudiocode
 # Edit at https://www.toptal.com/developers/gitignore?templates=python,visualstudiocode
 
-### Dataset ###
-data/test
-data/Public Testing Dataset_v2
-
-data/train
-data/Training Dataset_v*
-data/VisDrone*
-data/*.zip
-
-data/obj.names
-data/helper_fiftyoneDataset*.py
-
-### Results ###
-results/*
-
-### YOLOv7 ###
-yolov7/.git
-yolov7/weights/*
-output.txt
+### Testing Dataset ###
+tests/
 
 ### Python ###
 # Byte-compiled / optimized / DLL files
@@ -184,6 +167,7 @@ cython_debug/
 #.idea/
 
 ### VisualStudioCode ###
+.vscode/
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
