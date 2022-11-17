@@ -7,6 +7,7 @@ import time
 from copy import deepcopy
 from pathlib import Path
 from threading import Thread
+import gc
 
 import numpy as np
 import torch.distributed as dist
@@ -229,6 +230,8 @@ def train(hyp, opt, device, tb_writer=None):
             epochs += ckpt['epoch']  # finetune additional epochs
 
         del ckpt, state_dict
+    torch.cuda.empty_cache()    # Call empty_cache whenever we del something from gpu, forcing gpu to release ASAP
+    gc.collect()
 
     # Image sizes
     gs = max(int(model.stride.max()), 32)  # grid size (max stride)
@@ -477,7 +480,8 @@ def train(hyp, opt, device, tb_writer=None):
                         wandb_logger.log_model(
                             last.parent, opt, epoch, fi, best_model=best_fitness == fi)
                 del ckpt
-
+                torch.cuda.empty_cache()    # Call empty_cache whenever we del something from gpu, forcing gpu to release ASAP
+                gc.collect()
         # end epoch ----------------------------------------------------------------------------------------------------
     # end training
     if rank in [-1, 0]:
@@ -549,7 +553,7 @@ if __name__ == '__main__':
     parser.add_argument('--sync-bn', action='store_true', help='use SyncBatchNorm, only available in DDP mode')
     parser.add_argument('--local_rank', type=int, default=-1, help='DDP parameter, do not modify')
     parser.add_argument('--workers', type=int, default=8, help='maximum number of dataloader workers')
-    parser.add_argument('--project', default='runs/train', help='save to project/name')
+    parser.add_argument('--project', default='../results/yolov7/train', help='save to project/name')     # alter default storage area to ../results (the same directory with mmdetection)
     parser.add_argument('--entity', default=None, help='W&B entity')
     parser.add_argument('--name', default='exp', help='save to project/name')
     parser.add_argument('--exist-ok', action='store_true', help='existing project/name ok, do not increment')
