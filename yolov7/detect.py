@@ -149,6 +149,8 @@ def detect(save_img=False):
                         content[2] = round(content[2] * im0.shape[0])  # y-coco
                         content[3] = round(content[3] * im0.shape[1])  # w-coco
                         content[4] = round(content[4] * im0.shape[0])  # h-coco
+                        content[3] = content[3] if content[3] > 0 else 1
+                        content[4] = content[4] if content[4] > 0 else 1
                         # TODO : Check is any bounding box is outside the image 
                         content = [str(j) for j in content]
                         f.write(prediction_names[prediction_index][:-4] + ',' + ','.join(content) + '\n')   # save predictions with coco format

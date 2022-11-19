@@ -1,5 +1,5 @@
 # 
-train: /home/user/桌面/FredH/AICUP/AICUP2022-droneDetection-v2/data/VisDrone/images/train
+train: /home/user/桌面/FredH/AICUP/AICUP2022-droneDetection-v2/data/VisDrone/images/train/
 test: /home/user/桌面/FredH/AICUP/AICUP2022-droneDetection-v2/data/VisDrone/images/valid/
 val: /home/user/桌面/FredH/AICUP/AICUP2022-droneDetection-v2/data/VisDrone/images/test/
 
