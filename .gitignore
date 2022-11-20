@@ -10,11 +10,23 @@ data/Training Dataset_v*
 data/VisDrone*
 data/*.zip
 
+data/FusionDataset
+
 data/obj.names
 data/helper_fiftyoneDataset*.py
 
 ### Results ###
 results/*
+
+# yolov7 folder (save config file only (thos file enswith yaml))
+!results/yolov7/
+results/yolov7/*
+!results/yolov7/train/
+results/yolov7/train/*
+!results/yolov7/train/*.yaml
+!results/yolov7/train/*/
+results/yolov7/train/*/*
+!results/yolov7/train/*/*.yaml
 
 ### YOLOv7 ###
 yolov7/.git
