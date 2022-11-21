@@ -27,6 +27,16 @@ results/yolov7/train/*
 !results/yolov7/train/*/
 results/yolov7/train/*/*
 !results/yolov7/train/*/*.yaml
+!results/yolov7/train/*/results.txt
+
+# yolov7 folder (save config file only (thos file enswith yaml))
+!results/mmdet/
+results/mmdet/*
+!results/mmdet/*/
+results/mmdet/*/*
+!results/mmdet/*/config.py
+!results/mmdet/*/output.txt
+!results/mmdet/*/*.json
 
 ### YOLOv7 ###
 yolov7/.git
