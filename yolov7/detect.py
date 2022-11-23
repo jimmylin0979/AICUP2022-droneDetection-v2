@@ -139,10 +139,10 @@ def detect(save_img=False):
                         prediction_path = str(save_dir / 'predictions_tiled.csv')   # use tiled 
                     with open(prediction_path, 'a') as f:
                         content = [int(cls.item()), *xywh, conf.item()]
-                        if content[0] == 2:     # BUG: I have no idea why the label index of motorcyle and person will mismatch
-                            content[0] = 3
-                        elif content[0] == 3:
-                            content[0] = 2
+                        # if content[0] == 2:     # BUG: I have no idea why the label index of motorcyle and person will mismatch
+                        #     content[0] = 3
+                        # elif content[0] == 3:
+                        #     content[0] = 2
                         content[1] = content[1] - content[3] / 2     # x-center -> x
                         content[2] = content[2] - content[4] / 2     # y-center -> y
                         content[1] = round(content[1] * im0.shape[1])  # x-coco
