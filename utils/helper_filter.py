@@ -9,7 +9,8 @@ def main(filepath):
     df = pd.read_csv(filepath, header=None)
     drop_index = []
     # threshold = [0.4, 0.4, 0.30, 0.30]      # Car, Hov, Person, Motor
-    threshold = [0, 0, 0, 0]      # Car, Hov, Person, Motor
+    threshold = [0.31, 0.31, 0.20, 0.20]      # Car, Hov, Person, Motor
+    # threshold = [0.31, 0.31, 0.31, 0.31]      # Car, Hov, Person, Motor
     for i in range(df.shape[0]):
 
         #         

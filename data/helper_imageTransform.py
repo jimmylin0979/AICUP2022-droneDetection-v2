@@ -1,10 +1,9 @@
 #
+import argparse
 import numpy as np
 import cv2
 import os
 import matplotlib.pyplot as plt
-
-#
 from tqdm import tqdm
 
 #
@@ -40,10 +39,16 @@ def log_transform(image):
 # 
 if __name__ == "__main__":
 
+    # 
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--root", type=str, default="./Private Testing Dataset_v2/private_tiled", required=True)
+    opts = parser.parse_args()
+
     #
     # root = "./test/public_tiled_brighten"
     # root = "./train_coco_train"
-    root = "./train_coco_valid"
+    # root = "./Private Testing Dataset_v2/private_tiled"
+    root = opts.root
 
     for filename in tqdm(os.listdir(f"{root}/data")):
         # 
