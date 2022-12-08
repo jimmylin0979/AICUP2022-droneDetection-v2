@@ -460,14 +460,14 @@ class TiledSet(object):
 
             # # 
             # # Visualize (before merging)
-            img = cv2.imread(f'{root_originalImage}/{current_originalName}.png')
+            # img = cv2.imread(f'{root_originalImage}/{current_originalName}.png')
             # self.visualize(img, overall_anns)
             
             # # Deal with overlapping bounding boxes with NMS
             # logging.debug("=" * 80)
             logging.debug(f"Before filter, nums of bbox: {len(overall_anns)}")
             # logging.debug(f"{current_originalName}")
-            overall_anns = NMS(overall_anns, threshold=0.5, img=img, imgName = current_originalName)
+            overall_anns = NMS(overall_anns, threshold=0.5, img=None, imgName = current_originalName)
             logging.debug(f"After filter, nums of bbox: {len(overall_anns)}")
 
             # # Visualize (after merging)
