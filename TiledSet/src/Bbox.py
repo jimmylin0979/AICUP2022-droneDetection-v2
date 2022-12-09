@@ -32,7 +32,7 @@ class Bbox(object):
         if len(bbox) >= 6:
             self.confidence = float(bbox[5])
         else:
-            self.confidence = 1
+            self.confidence = None
         # 
         self.x2 = self.x1 + self.w
         self.y2 = self.y1 + self.h

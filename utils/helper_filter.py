@@ -1,16 +1,15 @@
 import pandas as pd
 import argparse
 
-def main(filepath):
+def main(args):
     """
     """
 
     # 
-    df = pd.read_csv(filepath, header=None)
+    df = pd.read_csv(args.file, header=None)
     drop_index = []
     # threshold = [0.4, 0.4, 0.30, 0.30]      # Car, Hov, Person, Motor
-    threshold = [0.31, 0.31, 0.20, 0.20]      # Car, Hov, Person, Motor
-    # threshold = [0.31, 0.31, 0.31, 0.31]      # Car, Hov, Person, Motor
+    threshold = args.threshold     # Car, Hov, Person, Motor
     for i in range(df.shape[0]):
 
         #         
@@ -18,7 +17,7 @@ def main(filepath):
         confidence = df.iloc[i, -1]
 
         # Filter out prediction with different threshold depends on its class
-        if confidence < threshold[clas]:
+        if confidence < threshold:
                 drop_index.append(i)
     
     # Drop the low probability row
@@ -28,7 +27,7 @@ def main(filepath):
     df = df.drop(6, axis=1)
 
     #
-    df.to_csv("./predictions.csv", index=False, header=False)
+    df.to_csv("./predictions_filter_b.csv", index=False, header=False)
 
 if __name__ == "__main__":
 
@@ -40,9 +39,9 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='AICUP2022-droneDetection-v2')
     parser.add_argument('--file', type=str, required=True,
                                 help='the file in which are going to filter out low probability bbox')
-    # parser.add_argument('--threshold', type=float, required=True,
-    #                             help='threshold')
+    parser.add_argument('--threshold', type=float, required=True,
+                                help='threshold')
     args = parser.parse_args()
 
     # 
-    main(args.file)
+    main(args)

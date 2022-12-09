@@ -1,9 +1,20 @@
 # Created by https://www.toptal.com/developers/gitignore/api/python,visualstudiocode
 # Edit at https://www.toptal.com/developers/gitignore?templates=python,visualstudiocode
 
+## log
+screenlog.0
+
+### model
+mmdetection
+
 ### Dataset ###
+data/FusionDataset
+data/Private Testing Dataset_v2
+
 data/test
 data/Public Testing Dataset_v2
+data/Training Dataset_v5
+data/Training Dataset_v5 mmdet
 
 data/train
 data/Training Dataset_v*
@@ -11,13 +22,12 @@ data/VisDrone*
 data/*.zip
 
 data/FusionDataset
-data/Private Testing Dataset_v2
 
 data/obj.names
 data/helper_fiftyoneDataset*.py
 
 ### Results ###
-results/*
+runs/*
 
 # yolov7 folder (save config file only (thos file enswith yaml))
 !results/yolov7/
@@ -28,16 +38,6 @@ results/yolov7/train/*
 !results/yolov7/train/*/
 results/yolov7/train/*/*
 !results/yolov7/train/*/*.yaml
-!results/yolov7/train/*/results.txt
-
-# yolov7 folder (save config file only (thos file enswith yaml))
-!results/mmdet/
-results/mmdet/*
-!results/mmdet/*/
-results/mmdet/*/*
-!results/mmdet/*/config.py
-!results/mmdet/*/output.txt
-!results/mmdet/*/*.json
 
 ### YOLOv7 ###
 yolov7/.git
@@ -207,7 +207,6 @@ cython_debug/
 #.idea/
 
 ### VisualStudioCode ###
-.vscode
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json

@@ -1,7 +1,7 @@
 # 
-train: /home/jimmylin0979/Desktop/jimmy/AICUP2022-droneDetection-v2/data/Training Dataset_v5/images/train/ 
-val: /home/jimmylin0979/Desktop/jimmy/AICUP2022-droneDetection-v2/data/Training Dataset_v5/images/valid/
-test: /home/jimmylin0979/Desktop/jimmy/AICUP2022-droneDetection-v2/data/Training Dataset_v5/images/test/
+train: /work/cilab906/AICUP/AICUP2022-droneDetection-v2/data/Training Dataset_v5 tiled/images/train/
+val: /work/cilab906/AICUP/AICUP2022-droneDetection-v2/data/Training Dataset_v5 tiled/images/valid/
+# test: /home/jimmylin0979/Desktop/jimmy/AICUP2022-droneDetection-v2/data/Training Dataset_v5/images/test/
 
 # number of classes
 nc: 4

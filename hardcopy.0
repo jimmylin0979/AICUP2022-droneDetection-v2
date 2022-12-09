@@ -1,0 +1,11 @@
+    attempt_download(weights)  # download if not found locally
+  File "/work/cilab906/AICUP/AICUP2022-droneDetection-v2/yolov7/utils/google_utils.py", line 31, in attempt_download
+    tag = subprocess.check_output('git tag', shell=True).decode().split()[-1]
+IndexError: list index out of range
+wandb: Waiting for W&B process to finish... (failed 1). Press Control-C to abort syncing.
+wandb: Synced yolov7-e6e_drone_aug12_tile: https://wandb.ai/tingfeng/YOLOR/runs/1d08gqxy
+wandb: Synced 5 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20221203_122451-1d08gqxy/logs
+cilab906@i1l0h1ctr1670041039136-9vvln:/work/cilab906/AICUP/AICUP2022-droneDetection-v2/yolov7$                                                          cilab906@i1l0h1c
+cilab906@i1l0h1ctr1670041039136-9vvln:/work/cilab906/AICUP/AICUP2022-droneDetection-v2/yolov7$
+

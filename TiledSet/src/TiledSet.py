@@ -2,6 +2,7 @@
 import numpy as np
 import cv2
 import os
+from pathlib import Path
 import shutil
 
 # 
@@ -323,7 +324,10 @@ class TiledSet(object):
             contents = fr.readlines()
             
         # 
-        fw = open("predictions.csv", "w")
+        target_folder = Path(prediction_path).parent
+        Merged_path = Path.joinpath(target_folder, "predictions.csv")
+        fw = open(Merged_path, "w")
+        
         while i < len(contents):    
             
             # Get the current original image name
@@ -460,14 +464,14 @@ class TiledSet(object):
 
             # # 
             # # Visualize (before merging)
-            # img = cv2.imread(f'{root_originalImage}/{current_originalName}.png')
+            img = cv2.imread(f'{root_originalImage}/{current_originalName}.png')
             # self.visualize(img, overall_anns)
             
             # # Deal with overlapping bounding boxes with NMS
             # logging.debug("=" * 80)
             logging.debug(f"Before filter, nums of bbox: {len(overall_anns)}")
             # logging.debug(f"{current_originalName}")
-            overall_anns = NMS(overall_anns, threshold=0.5, img=None, imgName = current_originalName)
+            overall_anns = NMS(overall_anns, threshold=0.5, img=img, imgName = current_originalName)
             logging.debug(f"After filter, nums of bbox: {len(overall_anns)}")
 
             # # Visualize (after merging)

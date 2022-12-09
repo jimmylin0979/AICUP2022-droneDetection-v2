@@ -139,10 +139,7 @@ def detect(save_img=False):
                         prediction_path = str(save_dir / 'predictions_tiled.csv')   # use tiled 
                     with open(prediction_path, 'a') as f:
                         content = [int(cls.item()), *xywh, conf.item()]
-                        # if content[0] == 2:     # BUG: I have no idea why the label index of motorcyle and person will mismatch
-                        #     content[0] = 3
-                        # elif content[0] == 3:
-                        #     content[0] = 2
+                        
                         content[1] = content[1] - content[3] / 2     # x-center -> x
                         content[2] = content[2] - content[4] / 2     # y-center -> y
                         content[1] = round(content[1] * im0.shape[1])  # x-coco
@@ -197,7 +194,7 @@ def detect(save_img=False):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--weights', nargs='+', type=str, default='yolov7.pt', help='model.pt path(s)')
-    parser.add_argument('--source', type=str, default='inference/images', help='source')  # file/folder, 0 for webcam
+    parser.add_argument('--source', type=str, default='inference/images',help='source')  # file/folder, 0 for webcam
     parser.add_argument('--img-size', type=int, default=640, help='inference size (pixels)')
     parser.add_argument('--conf-thres', type=float, default=0.25, help='object confidence threshold')
     parser.add_argument('--iou-thres', type=float, default=0.45, help='IOU threshold for NMS')
@@ -210,7 +207,7 @@ if __name__ == '__main__':
     parser.add_argument('--agnostic-nms', action='store_true', help='class-agnostic NMS')
     parser.add_argument('--augment', action='store_true', help='augmented inference')
     parser.add_argument('--update', action='store_true', help='update all models')
-    parser.add_argument('--project', default='../results/yolov7/detect', help='save results to project/name')
+    parser.add_argument('--project', default='../runs/yolov7/detect', help='save results to project/name')
     parser.add_argument('--name', default='exp', help='save results to project/name')
     parser.add_argument('--exist-ok', action='store_true', help='existing project/name ok, do not increment')
     parser.add_argument('--no-trace', action='store_true', help='don`t trace model')

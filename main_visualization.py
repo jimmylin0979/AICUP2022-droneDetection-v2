@@ -10,9 +10,9 @@ def main():
 
     #
     CLASSES = ('car', 'hov', 'person', 'motorcycle')
-    root_sample = r'./data/Public Testing Dataset_v2/public/'
+    root_sample = r'./data/Private Testing Dataset_v2/private/'
     # root_sample = r'./data/Public Testing Dataset_v2/public_tiled/data'
-    root_detections = r'./results'
+    root_detections = r'./runs'
 
     #
     dfs = []
@@ -38,7 +38,7 @@ def main():
 
     # ./results/yolov7/train
     blacklist = ['']
-    root_detections_yolov7 = f"{root_detections}/yolov7/detect"
+    root_detections_yolov7 = f"{root_detections}/yolov7/detect_private"
     for result in os.listdir(root_detections_yolov7):
         # 
         if not os.path.isdir(f"{root_detections_yolov7}/{result}"):
