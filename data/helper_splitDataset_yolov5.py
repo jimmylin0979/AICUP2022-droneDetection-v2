@@ -142,9 +142,9 @@ def main(root_src, root_dst):
 if __name__ == "__main__":
     # 
     parser = argparse.ArgumentParser(description='AICUP2022 - droneDetection')
-    parser.add_argument('--root_src', type=str, required=True,
+    parser.add_argument('--root-src', type=str, required=True,
                                 help='The root_src folder path of dataset')
-    parser.add_argument('--root_dst', type=str, required=True,
+    parser.add_argument('--root-dst', type=str, required=True,
                                 help='The root_dst folder path of dataset')
     args = parser.parse_args()
 

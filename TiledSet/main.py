@@ -17,8 +17,8 @@ if __name__ == "__main__":
     # Argument Parser
     parser = argparse.ArgumentParser(description="")
     parser.add_argument("--mode", type=str, default="tile", required=True)
-    parser.add_argument("--root_src", type=str, required=True)
-    parser.add_argument("--root_dst", type=str)
+    parser.add_argument("--root-src", type=str, required=True)
+    parser.add_argument("--root-dst", type=str)
     # # There maybe be more than one variable to describe the tile size 
     # parser.add_argument("--tileSize", nargs="+", type=int, required=True,
     #                         help="")
@@ -83,7 +83,8 @@ if __name__ == "__main__":
         tileSet = TiledSet((540, 960), (540 // 2, 960 // 2))
         # root_originalImage = "/home/user/桌面/FredH/AICUP/AICUP2022-droneDetection-v2/data/Public Testing Dataset_v2/public"
         root_originalImage = opts.root_src
-        tileSet.merge(prediction_path="../results/yolov7/detect/yolov7-e6e-fusion-v6/predictions_tiled.csv", root_originalImage=root_originalImage, sep=",")
+        prediction_path = opts.root_dst
+        tileSet.merge(prediction_path=prediction_path, root_originalImage=root_originalImage, sep=",")
 
     ###################################################################################################
     # 
