@@ -16,6 +16,9 @@ data/Private Testing Dataset_v2
 data/obj.names
 data/helper_fiftyoneDataset*.py
 
+data_init
+data2
+
 ### Results ###
 results/*
 

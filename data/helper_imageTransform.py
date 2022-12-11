@@ -50,18 +50,18 @@ if __name__ == "__main__":
     # root = "./Private Testing Dataset_v2/private_tiled"
     root = opts.root
 
-    for filename in tqdm(os.listdir(f"{root}/data")):
+    for filename in tqdm(os.listdir(f"{root}")):
         # 
         if not filename.endswith('.png'):
             continue
         #  
         # filename = f"{root}/data/img0001_0_0.png"
-        image = cv2.imread(f"{root}/data/{filename}")
+        image = cv2.imread(f"{root}/{filename}")
         # cv2.imwrite("original.png", image)
         
         # Test for brighten
         image = brighten(image)
-        cv2.imwrite(f"{root}/data/{filename}", image)
+        cv2.imwrite(f"{root}/{filename}", image)
     
     # # Test for logt transform
     # image = log_transform(image)

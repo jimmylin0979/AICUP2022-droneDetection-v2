@@ -170,7 +170,13 @@ class TiledSet(object):
         # Create root_dst dataset folder 
         # Assert error when there already exists a folder with same name  
         os.makedirs(root_dst, exist_ok=False)
-        os.mkdir(f"{root_dst}/data")
+        if with_annotations:
+            os.makedirs(f"{root_dst}/images/train")
+            os.makedirs(f"{root_dst}/images/valid")
+            os.makedirs(f"{root_dst}/labels/train")
+            os.makedirs(f"{root_dst}/labels/valid")
+        else:
+            os.mkdir(f"{root_dst}/data")
 
         # 
         images_listdir = []
@@ -182,12 +188,21 @@ class TiledSet(object):
 
             # Get images from images.txt
             images_listdir = []
-            with open(f"{root_src}/images.txt", "r") as fr:
-                contents = fr.readlines()
-                for content in contents:
-                    content = content.strip("\n ")
-                    content = content[5:]
-                    images_listdir.append(content)
+            # with open(f"{root_src}/images.txt", "r") as fr:
+            #     contents = fr.readlines()
+            #     for content in contents:
+            #         content = content.strip("\n ")
+            #         # content = content[5:]
+            #         images_listdir.append(content)
+            
+            # 
+            for filename in os.listdir(f"{root_src}/images/train"):
+                if filename.endswith(".png"):
+                    images_listdir.append(f"train/{filename}")
+            for filename in os.listdir(f"{root_src}/images/valid"):
+                if filename.endswith(".png"):
+                    images_listdir.append(f"valid/{filename}")
+            
         else:
             images_listdir = sorted(os.listdir(f"{root_src}"))
         
@@ -204,15 +219,16 @@ class TiledSet(object):
                 if not with_annotations:
                     img = cv2.imread(f"{root_src}/{filename}")
                 else:
-                    img = cv2.imread(f"{root_src}/data/{filename}")     # 
+                    img = cv2.imread(f"{root_src}/images/{filename}")     # 
                 h, w = img.shape[0], img.shape[1]                   # shape (Height, Width, Channels) (1080. 1920, 3)
 
                 # Open annotation files corresponding to images 
                 # After porcessing, 
                 filename = filename[:idx]
                 anns = []
-                if os.path.exists(f"{root_src}/data/{filename}.txt"):
-                    with open(f"{root_src}/data/{filename}.txt", "r") as fr:
+                # if os.path.exists(f"{root_src}/data/{filename}.txt"):
+                if with_annotations:
+                    with open(f"{root_src}/labels/{filename}.txt", "r") as fr:
                         contents = fr.readlines()
                         for content in contents:
                             # Clear
@@ -263,10 +279,14 @@ class TiledSet(object):
                         # Flush the tiled information back into disk 
                         # Image         will be save with name {original name}_{rowCount}_{colCount}.png
                         # Annotations   will be save with name {original name}_{rowCount}_{colCount}.txt
-                        output_filename = f"{root_dst}/data/{filename}_{rowCount}_{colCount}"
-                        cv2.imwrite(f"{output_filename}.{filetype}", tiled_img)
+                        output_img_name = f"{root_dst}/data/{filename}_{rowCount}_{colCount}"
                         if with_annotations:
-                            with open(f"{output_filename}.txt", "w") as fw:
+                            output_img_name = f"{root_dst}/images/{filename}_{rowCount}_{colCount}"
+
+                        cv2.imwrite(f"{output_img_name}.{filetype}", tiled_img)
+                        if with_annotations:
+                            output_ann_name = f"{root_dst}/labels/{filename}_{rowCount}_{colCount}"
+                            with open(f"{output_ann_name}.txt", "w") as fw:
                                 for ann in tiled_ann:
                                     # Transfer annotation format back into (x_center, y_center, width, height)
                                     ann[1] = (ann[1] + ann[3] / 2) / (c_end - c)
@@ -301,10 +321,11 @@ class TiledSet(object):
                         rowCount += 1
         
         # Write images.txt file
-        with open(f"{root_dst}/images.txt", "w") as fw:
-            for filename in sorted(os.listdir(f"{root_dst}/data")):
-                if self.isImage(filename):
-                   fw.write(f"data/{filename}\n")
+        if not with_annotations:
+            with open(f"{root_dst}/images.txt", "w") as fw:
+                for filename in sorted(os.listdir(f"{root_dst}/data")):
+                    if self.isImage(filename):
+                        fw.write(f"data/{filename}\n")
     
     def merge(self, prediction_path, root_originalImage=None, sep=" "):
         """

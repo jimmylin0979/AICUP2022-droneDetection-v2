@@ -66,7 +66,13 @@ if __name__ == "__main__":
     # # root_dst = "/home/jimmylin0979/Desktop/datas/AICUP2022-droneDetection/test/public_tiled"
     # root_src = "/home/user/桌面/FredH/AICUP/AICUP2022-droneDetection-v2/data/Private Testing Dataset_v2/private"
     # root_dst = "/home/user/桌面/FredH/AICUP/AICUP2022-droneDetection-v2/data/Private Testing Dataset_v2/private_tiled"
-    # tileSet.tile(root_src=root_src, root_dst=root_dst, with_annotations=False)
+    
+    if opts.mode == "tile_test":
+
+        tileSet = TiledSet((540, 960), (540 // 2, 960 // 2))
+        root_src = opts.root_src
+        root_dst = opts.root_dst
+        tileSet.tile(root_src=root_src, root_dst=root_dst, with_annotations=False)
     
     ###################################################################################################
     # Uncomment this to generate merged predictions of tiled test dataset (csv)

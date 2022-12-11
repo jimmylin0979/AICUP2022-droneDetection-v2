@@ -22,14 +22,14 @@ def main():
         8: 1,       # bus -> hov
         9: 3,       # motor -> motrocycle
     }
-    for filename in tqdm(os.listdir(f"{visdrone_dataset}/labels/train")):
+    for filename in tqdm(os.listdir(f"{fusion_dataset}/labels/train")):
         # 
         if not filename.endswith('.txt'):
             continue
         
         # Read annotations from visdrone
         contents = []
-        with open(f"{visdrone_dataset}/labels/train/{filename}", "r") as fr:
+        with open(f"{fusion_dataset}/labels/train/{filename}", "r") as fr:
             contents = fr.readlines()
 
         with open(f"{fusion_dataset}/labels/train/{filename}", "w") as fw:
