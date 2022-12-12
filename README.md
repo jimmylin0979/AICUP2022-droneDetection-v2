@@ -115,6 +115,8 @@ Be sure to start training after you finish all transformation on dataset (ex. ti
 
 Be sure to start training after you finish all transformation on dataset (ex. tiling, gamma correction, and so on)
 
++ Weights (Private score 0.758381): https://drive.google.com/uc?export=download&id=1zGFK57FCeo-ylCeEoirI0ilJg1aFtAdE
+
 1. Run the below command to start evluating, the predictions will be stored in `./results/yolov7/train/`
     ```bash
     cd yolov7
