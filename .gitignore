@@ -1,6 +1,10 @@
 # Created by https://www.toptal.com/developers/gitignore/api/python,visualstudiocode
 # Edit at https://www.toptal.com/developers/gitignore?templates=python,visualstudiocode
 
+### Documents ###
+*.pptx
+*.docx
+
 ### Dataset ###
 data/test
 data/Public Testing Dataset_v2
