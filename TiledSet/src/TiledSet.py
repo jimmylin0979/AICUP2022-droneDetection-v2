@@ -289,6 +289,7 @@ class TiledSet(object):
                             with open(f"{output_ann_name}.txt", "w") as fw:
                                 for ann in tiled_ann:
                                     # Transfer annotation format back into (x_center, y_center, width, height)
+                                    ann = ann[:5]
                                     ann[1] = (ann[1] + ann[3] / 2) / (c_end - c)
                                     ann[2] = (ann[2] + ann[4] / 2) / (r_end - r)
                                     ann[3] /= (c_end - c)

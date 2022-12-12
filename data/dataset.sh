@@ -1,7 +1,7 @@
 # Please execute this bash script at the same directory level. ie, inside the ./data folder
 
 # Data root folder
-ROOT_FOLDER=data2
+ROOT_FOLDER=data
 
 #######################################
 ### Official Dataset Public Testing ###

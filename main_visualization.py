@@ -28,7 +28,7 @@ def main():
         if result in blacklist:
             continue
         
-        output_path = f"{root_detections_mmdet}/{result}/predictions.csv"
+        output_path = f"{root_detections_mmdet}/{result}/predictions_public.csv"
         print(output_path)
         if os.path.exists(output_path):
             df = pd.read_csv(output_path, header=None)
@@ -46,7 +46,7 @@ def main():
         if result in blacklist:
             continue
         
-        output_path = f"{root_detections_yolov7}/{result}/predictions.csv"
+        output_path = f"{root_detections_yolov7}/{result}/predictions_public.csv"
         print(output_path)
         if os.path.exists(output_path):
             df = pd.read_csv(output_path, header=None)

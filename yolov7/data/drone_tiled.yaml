@@ -1,7 +1,7 @@
 # 
-train: /home/user/桌面/FredH/AICUP/AICUP2022-droneDetection-v2/data/Training Dataset_v5 tiled/images/train/ 
-val: /home/user/桌面/FredH/AICUP/AICUP2022-droneDetection-v2/data/Training Dataset_v5 tiled/images/valid/
-test: /home/user/桌面/FredH/AICUP/AICUP2022-droneDetection-v2/data/Training Dataset_v5 tiled/images/test/
+train: ../data/Training Dataset_v5 tiled/images/train/ 
+val: ../data/Training Dataset_v5 tiled/images/valid/
+test: ../data/Training Dataset_v5 tiled/images/test/
 
 # number of classes
 nc: 4

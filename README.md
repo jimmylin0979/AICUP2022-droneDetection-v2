@@ -42,7 +42,8 @@ To check what was happening during setting, please have a see in `./data/dataset
     bash dataset.sh
     ```
 
-The final directory structure will be like (only list some important dataset folders):
+It will take about 20 ~ 30 minutes, depends on your CPU power, to complete the setup. (It took 20 minutes for i5-12400 to finish setup)   
+The final directory structure should be like (we only list some important dataset folders here):
 
 ```
 ./data
@@ -73,7 +74,8 @@ The final directory structure will be like (only list some important dataset fol
 ├── Training Dataset_v5 tiled
 │   ├── images
 |   └── labels
-
+|
+├── ...
 ```
 
 <!-- Second, run the command below to transform the dataset
@@ -96,13 +98,15 @@ python main.py --mode tile --root-src train_yolo_train --root-dst train_yolo_tra
 
 Be sure to start training after you finish all transformation on dataset (ex. tiling, gamma correction, and so on)
 
-1. Download the pretrained weights of `Yolov7-E6E` from https://github.com/WongKinYiu/yolov7,
+1. Download the pretrained weights of `yolov7-e6e_training.pt` in transfer learning section from https://github.com/WongKinYiu/yolov7,
     place the weights into folder `yolov7/weights`
 
-2. Run the command below to start training, the results will be stored in `./results` folder
+2. Run the command below to start training, the results will be stored in `./results` folder,   
+      the follow command will consume about 20G memory usage on GPU, you can modify the batch size depends on your personal device. 
+
     ```bash
     cd yolov7
-    python train_aux.py --workers 4 --device 0 --batch-size 4 --data data/fusionDataset.yaml --img 1280 1280 --cfg cfg/training/yolov7-e6e.yaml --weights weights/yolov7-e6e.pt --name yolov7-e6e-aug-tile-fusion --hyp data/hyp.scratch.custom.yaml --label-smoothing 0.1
+    python train_aux.py --workers 4 --device 0 --batch-size 4 --data data/fusionDataset.yaml --img 1280 1280 --cfg cfg/training/yolov7-e6e.yaml --weights weights/yolov7-e6e_training.pt --name yolov7-e6e-aug-tile-fusion --hyp data/hyp.scratch.custom.yaml --label-smoothing 0.1
     ```
 
 ---
@@ -119,7 +123,7 @@ Be sure to start training after you finish all transformation on dataset (ex. ti
     python detect.py --weights ../results/yolov7/train/yolov7-e6e-aug-tile-fusion/weights/best.pt --source ../data/Public\ Testing\ Dataset_v2/public_tiled/data/ --img-size 1280 --conf-thres 0.4 --device 0 --save-txt --save-conf --nosave --augment --name yolov7-e6e-aug-tile-fusion-public
 
     # Private dataset (tiling)
-    python detect.py --weights ../results/yolov7/train/yolov7-e6e-aug-tile-fusion/weights/best.pt --source ../data/Public\ Testing\ Dataset_v2/public_tiled/data/ --img-size 1280 --conf-thres 0.4 --device 0 --save-txt --save-conf --nosave --augment --name yolov7-e6e-aug-tile-fusion-private
+    python detect.py --weights ../results/yolov7/train/yolov7-e6e-aug-tile-fusion/weights/best.pt --source ../data/Private\ Testing\ Dataset_v2/private_tiled/data/ --img-size 1280 --conf-thres 0.4 --device 0 --save-txt --save-conf --nosave --augment --name yolov7-e6e-aug-tile-fusion-private
     ```
 
 2. Merge tiling predictions
@@ -127,10 +131,14 @@ Be sure to start training after you finish all transformation on dataset (ex. ti
     cd TiledSet
 
     # Public dataset (merged)
-    python main.py --mode merge --root-src ../data/Public Testing Dataset_v2/private --root-dst ../results/yolov7/detect/yolov7-e6e-aug-tile-fusion-public/prediction_tile.csv
+    python main.py --mode merge --root-src ../data/'Public Testing Dataset_v2'/public --root-dst ../results/yolov7/detect/yolov7-e6e-aug-tile-fusion-public/predictionstile.csv
+    mv predictions.csv predictions_public.csv
+    mv predictions_public.csv ../results/yolov7/detect/yolov7-e6e-aug-tile-fusion-public/predictions_public.csv
 
     # Private dataset (merged)
-    python main.py --mode merge --root-src ../data/Private Testing Dataset_v2/private --root-dst ../results/yolov7/detect/yolov7-e6e-aug-tile-fusion-private/prediction_tile.csv
+    python main.py --mode merge --root-src ../data/'Private Testing Dataset_v2'/private --root-dst ../results/yolov7/detect/yolov7-e6e-aug-tile-fusion-private/predictions_tile.csv
+    mv predictions.csv predictions_private.csv
+    mv predictions_private.csv ../results/yolov7/detect/yolov7-e6e-aug-tile-fusion-private/predictions_private.csv
     ```
 ---
 

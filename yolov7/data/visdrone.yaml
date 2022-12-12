@@ -1,7 +1,7 @@
 # 
-train: /home/user/桌面/FredH/AICUP/AICUP2022-droneDetection-v2/data/VisDrone/images/train/
-test: /home/user/桌面/FredH/AICUP/AICUP2022-droneDetection-v2/data/VisDrone/images/valid/
-val: /home/user/桌面/FredH/AICUP/AICUP2022-droneDetection-v2/data/VisDrone/images/test/
+train: ../data/VisDrone/images/train/
+test: ../data/VisDrone/images/valid/
+val: ../data/VisDrone/images/test/
 
 # number of classes
 nc: 10
