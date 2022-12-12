@@ -2,6 +2,14 @@
 
 ## About the project
 
+<p align="center">
+  <img src="./imgs/droneDetection.jpg" />
+</p>
+
+無人機飛行載具之智慧計數競賽 https://tbrain.trendmicro.com.tw/Competitions/Details/25
+
+---
+
 ## Getting Start
 
 ### Installation
@@ -115,7 +123,7 @@ Be sure to start training after you finish all transformation on dataset (ex. ti
 
 Be sure to start training after you finish all transformation on dataset (ex. tiling, gamma correction, and so on)
 
-+ Weights (Private score 0.758381): https://drive.google.com/uc?export=download&id=1zGFK57FCeo-ylCeEoirI0ilJg1aFtAdE
+<!-- + Weights (Private score 0.758381): https://drive.google.com/uc?export=download&id=1zGFK57FCeo-ylCeEoirI0ilJg1aFtAdE -->
 
 1. Run the below command to start evluating, the predictions will be stored in `./results/yolov7/train/`
     ```bash
