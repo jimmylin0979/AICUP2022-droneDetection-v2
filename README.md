@@ -123,7 +123,7 @@ Be sure to start training after you finish all transformation on dataset (ex. ti
 
 Be sure to start training after you finish all transformation on dataset (ex. tiling, gamma correction, and so on)
 
-<!-- + Weights (Private score 0.758381): https://drive.google.com/uc?export=download&id=1zGFK57FCeo-ylCeEoirI0ilJg1aFtAdE -->
++ Weights (Private score 0.758381): https://drive.google.com/uc?export=download&id=1zGFK57FCeo-ylCeEoirI0ilJg1aFtAdE
 
 1. Run the below command to start evluating, the predictions will be stored in `./results/yolov7/train/`
     ```bash
@@ -150,6 +150,20 @@ Be sure to start training after you finish all transformation on dataset (ex. ti
     mv predictions.csv predictions_private.csv
     mv predictions_private.csv ../results/yolov7/detect/yolov7-e6e-aug-tile-fusion-private/predictions_private.csv
     ```
+3. Filter out confidence column
+    ```bash
+    cd utils
+    
+    # Public dataset
+    python helper_filter.py --file ../results/yolov7/detect/yolov7-e6e-aug-tile-fusion-public/predictions_public.csv
+    mv predictions.csv ../results/yolov7/detect/yolov7-e6e-aug-tile-fusion-public/predictions_public.csv   # the file now is able to upload to leaderboard now, 
+    
+    # Private dataset
+    python helper_filter.py --file ../results/yolov7/detect/yolov7-e6e-aug-tile-fusion-private/predictions_private.csv
+    mv predictions.csv ../results/yolov7/detect/yolov7-e6e-aug-tile-fusion-private/predictions_private.csv  # the file now is able to upload to leaderboard now,
+    ```
+4. The final prediction file will be stored in `./results/yolov7/detect/yolov7-e6e-aug-tile-fusion-private/predictions_private.csv` and `results/yolov7/detect/yolov7-e6e-aug-tile-fusion-public/predictions_public.csv` separately
+
 ---
 
 ## Visualization

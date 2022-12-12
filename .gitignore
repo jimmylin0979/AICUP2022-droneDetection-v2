@@ -37,6 +37,8 @@ results/yolov7/train/*
 results/yolov7/train/*/*
 !results/yolov7/train/*/*.yaml
 !results/yolov7/train/*/results.txt
+!results/yolov7/train/*/weights
+results/yolov7/train/*/weights/*
 
 # yolov7 folder (save config file only (thos file enswith yaml))
 !results/mmdet/
